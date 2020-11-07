@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.core.Conf;
 import org.example.core.Template;
+import org.example.middlewares.LoggerMiddleware;
 import spark.Spark;
 
 import java.util.HashMap;
@@ -26,5 +27,7 @@ public class App {
 
         // Configure server port
         Spark.port(Conf.HTTP_PORT);
+        final LoggerMiddleware log = new LoggerMiddleware();
+        Spark.before(log::process);
     }
 }
